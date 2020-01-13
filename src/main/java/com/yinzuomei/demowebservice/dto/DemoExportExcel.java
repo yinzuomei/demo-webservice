@@ -26,7 +26,7 @@ public class DemoExportExcel {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date createdTime;
 
-	@Excel(name = "删除标志", orderNum = "4")
+	@Excel(name = "删除标志", replace = {"已删除_1", "未删除_0"},orderNum = "4")
 	private String delFlag;
 
 	@Excel(name = "更新时间", orderNum = "5",exportFormat = "yyyy-MM-dd HH:mm:ss")
