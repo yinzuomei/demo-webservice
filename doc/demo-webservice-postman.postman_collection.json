@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "1c833186-3f3f-4779-97c2-aa6e9fc6ab24",
+		"name": "demo-webservice-postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1、query",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demowebservice/demo/query?name=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demowebservice",
+						"demo",
+						"query"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "1"
+						}
+					]
+				},
+				"description": "http://localhost:8080/demowebservice/demo/query?name=1"
+			},
+			"response": []
+		},
+		{
+			"name": "2、save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"奶奶\",\n\t\"age\":80\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/demowebservice/demo/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demowebservice",
+						"demo",
+						"save"
+					]
+				},
+				"description": "http://localhost:8080/demowebservice/demo/save"
+			},
+			"response": []
+		},
+		{
+			"name": "3、delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demowebservice/demo/delete/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demowebservice",
+						"demo",
+						"delete",
+						"4"
+					]
+				},
+				"description": "http://localhost:8080/demowebservice/demo/delete/4"
+			},
+			"response": []
+		},
+		{
+			"name": "4、update",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\":7,\n\t\"name\":\"快要放假111111111了\",\n\t\"age\":35\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/demowebservice/demo/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demowebservice",
+						"demo",
+						"update"
+					]
+				},
+				"description": "http://localhost:8080/demowebservice/demo/update"
+			},
+			"response": []
+		},
+		{
+			"name": "5、导出Excel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/demowebservice/demo/downloadExcel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demowebservice",
+						"demo",
+						"downloadExcel"
+					]
+				},
+				"description": "http://localhost:8080/demowebservice/demo/downloadExcel"
+			},
+			"response": []
+		},
+		{
+			"name": "6、导入excel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/57630/Desktop/user.xls"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/demowebservice/demo/importExcel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"demowebservice",
+						"demo",
+						"importExcel"
+					]
+				},
+				"description": "http://localhost:8080/demowebservice/demo/importExcel"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
