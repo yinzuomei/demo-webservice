@@ -19,10 +19,20 @@ public class DemoImportEntity {
 	@Excel(name = "时间", orderNum = "2")
 	private Date date;
 
-	public DemoImportEntity(){
-		this.name=name;
-		this.age=age;
-		this.date=date;
+	@Excel(name = "删除标志", replace = {"已删除_1", "未删除_0"}, orderNum = "3")
+	private String delFlag;
+
+	public DemoImportEntity(String name, int age, Date date, String delFlag) {
+		this.name = name;
+		this.age = age;
+		this.date = date;
+		this.delFlag = delFlag;
 	}
 
+	public DemoImportEntity() {
+		this.name = name;
+		this.age = age;
+		this.date = date;
+		this.delFlag = delFlag;
+	}
 }
