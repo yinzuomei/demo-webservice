@@ -71,13 +71,27 @@ public class DemoController {
 		return demoService.query(name);
 	}
 
+	/**
+	 * @param response
+	 * @return void
+	 * @Author yinzuomei
+	 * @Description 下载excel
+	 * @Date 2020/1/13 21:25
+	 **/
 	@GetMapping("/downloadExcel")
-	public void export(HttpServletResponse response){
-		List<DemoExportExcel> list=demoService.queryAll();
+	public void export(HttpServletResponse response) {
+		List<DemoExportExcel> list = demoService.queryAll();
 		//导出到Excel
-		ExcelUtils.exportExcel(list,"用户列表","sheet1", DemoExportExcel.class,+System.currentTimeMillis()+".xls",response);
+		ExcelUtils.exportExcel(list, "用户列表", "sheet1", DemoExportExcel.class, +System.currentTimeMillis() + ".xls", response);
 	}
 
+	/**
+	 * @param file
+	 * @return com.yinzuomei.demowebservice.dto.Result<java.util.List < com.yinzuomei.demowebservice.dto.DemoImportEntity>>
+	 * @Author yinzuomei
+	 * @Description 导入excel, 将数据存储到demo表
+	 * @Date 2020/1/13 21:25
+	 **/
 	@PostMapping("importExcel")
 	public Result<List<DemoImportEntity>> importExcel(@RequestParam("file") MultipartFile file) {
 		return demoService.importExcel(file);
