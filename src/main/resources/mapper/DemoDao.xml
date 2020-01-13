@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yinzuomei.demowebservice.dao.DemoDao">
+
+    <resultMap type="com.yinzuomei.demowebservice.entity.DemoEntity" id="demoMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="createdTime" column="created_time"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="age" column="age"/>
+    </resultMap>
+
+    <select id="query" resultMap="demoMap" parameterType="java.lang.String">
+        select * from demo where name like concat('%', #{name}, '%')
+    </select>
+
+    <delete id="delete">
+        delete from demo where id=#{id}
+    </delete>
+
+    <update id="update">
+        update demo set name=#{name},update_time=#{updateTime},age=#{age} where id=#{id}
+    </update>
+
+    <insert id="save">
+       INSERT INTO `demo` ( `name`,`age`, `created_time` )
+        VALUES (#{name},#{age}, #{createdTime} )
+    </insert>
+
+
+    <select id="queryAll" resultType="com.yinzuomei.demowebservice.dto.DemoExportExcel">
+        select * from demo order by id asc
+    </select>
+</mapper>
