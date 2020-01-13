@@ -5,6 +5,7 @@ import com.yinzuomei.demowebservice.dto.*;
 import com.yinzuomei.demowebservice.entity.DemoEntity;
 import com.yinzuomei.demowebservice.service.DemoService;
 import com.yinzuomei.demowebservice.utils.ExcelUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,9 +22,10 @@ import java.util.List;
 public class DemoServiceImpl implements DemoService {
 	@Autowired
 	private DemoDao demoDao;
+
 	@Override
 	public Result<List<DemoEntity>> query(String name) {
-		List<DemoEntity> list=demoDao.query(name);
+		List<DemoEntity> list = demoDao.query(name);
 		return new Result<List<DemoEntity>>().ok(list);
 	}
 
@@ -43,6 +45,7 @@ public class DemoServiceImpl implements DemoService {
 	@Override
 	public Result save(DemoSaveFormDTO formDTO) {
 		formDTO.setCreatedTime(new Date());
+		formDTO.setDelFlag("0");
 		demoDao.save(formDTO);
 		return new Result();
 	}
@@ -54,13 +57,19 @@ public class DemoServiceImpl implements DemoService {
 
 	@Override
 	public Result<List<DemoImportEntity>> importExcel(MultipartFile file) {
-		List<DemoImportEntity> list= ExcelUtils.importExcel(file,  0,  1, DemoImportEntity.class);
-		System.out.println("总共几条记录"+list.size());
-		for(DemoImportEntity entity:list){
-			DemoSaveFormDTO formDTO=new DemoSaveFormDTO();
+		List<DemoImportEntity> list = ExcelUtils.importExcel(file, 0, 1, DemoImportEntity.class);
+		System.out.println("总共几条记录" + list.size());
+		for (DemoImportEntity entity : list) {
+			DemoSaveFormDTO formDTO = new DemoSaveFormDTO();
 			formDTO.setCreatedTime(entity.getDate());
 			formDTO.setAge(entity.getAge());
 			formDTO.setName(entity.getName());
+			if (StringUtils.isNotEmpty(entity.getDelFlag())) {
+				formDTO.setDelFlag(entity.getDelFlag());
+			} else {
+				formDTO.setDelFlag("0");
+			}
+
 			demoDao.save(formDTO);
 		}
 		return new Result<List<DemoImportEntity>>().ok(list);

@@ -13,7 +13,7 @@
     </resultMap>
 
     <select id="query" resultMap="demoMap" parameterType="java.lang.String">
-        select * from demo where name like concat('%', #{name}, '%')
+        select * from demo where del_flag='0' and name like concat('%', #{name}, '%') order by id asc
     </select>
 
     <delete id="delete">
@@ -25,12 +25,12 @@
     </update>
 
     <insert id="save">
-       INSERT INTO `demo` ( `name`,`age`, `created_time` )
-        VALUES (#{name},#{age}, #{createdTime} )
+       INSERT INTO `demo` ( `name`,`age`, `created_time`,`del_flag` )
+        VALUES (#{name},#{age}, #{createdTime},#{delFlag})
     </insert>
 
 
     <select id="queryAll" resultType="com.yinzuomei.demowebservice.dto.DemoExportExcel">
-        select * from demo order by id asc
+        select * from demo where del_flag='0' order by id asc
     </select>
 </mapper>

@@ -19,4 +19,6 @@ public class DemoSaveFormDTO implements Serializable {
 	@Min(1)
 	private int age;
 	private Date createdTime;
+
+	private String delFlag;
 }
