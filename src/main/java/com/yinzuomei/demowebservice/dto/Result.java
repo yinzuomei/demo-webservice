@@ -10,6 +10,8 @@ package com.yinzuomei.demowebservice.dto;
 
 import com.yinzuomei.demowebservice.utils.ErrorCode;
 import com.yinzuomei.demowebservice.utils.MessageUtils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
@@ -19,16 +21,22 @@ import java.io.Serializable;
  * @author Mark sunlightcs@gmail.com
  * @since 1.0.0
  */
+
+@ApiModel(value="Result",description="接口统一返参")
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
      * 编码：0表示成功，其他值表示失败
      */
+    @ApiModelProperty(value="编码(0表示成功，其他值表示失败)",name="code",example="0")
     private int code = 0;
     /**
      * 消息内容
      */
+    @ApiModelProperty(value="消息内容",name="success",example="调用成功")
     private String msg = "success";
+
+    @ApiModelProperty(value="响应数据",name="data",example = "[]")
     /**
      * 响应数据
      */

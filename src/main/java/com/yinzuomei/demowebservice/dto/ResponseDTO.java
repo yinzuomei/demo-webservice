@@ -1,12 +1,9 @@
 package com.yinzuomei.demowebservice.dto;
 
-import com.yinzuomei.demowebservice.config.JaxbDateSerializer;
 import com.yinzuomei.demowebservice.entity.DemoEntity;
 import lombok.Data;
-import org.apache.poi.ss.formula.functions.T;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,7 +28,6 @@ public class ResponseDTO implements Serializable {
 	private String message;
 
 	@XmlElement(required = true)
-	@XmlJavaTypeAdapter(JaxbDateSerializer.class)
 	private Date responseTime;
 
 	@XmlElementWrapper(name = "users")

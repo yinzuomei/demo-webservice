@@ -4,12 +4,14 @@ import com.yinzuomei.demowebservice.dto.*;
 import com.yinzuomei.demowebservice.entity.DemoEntity;
 import com.yinzuomei.demowebservice.service.DemoService;
 import com.yinzuomei.demowebservice.utils.ExcelUtils;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -19,6 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("demo")
+@Api(value="demo",description= "用户信息管理（demo）")
 public class DemoController {
 	@Autowired
 	private DemoService demoService;
@@ -30,6 +33,7 @@ public class DemoController {
 	 * @Description 新增一条记录
 	 * @Date 2020/1/13 14:34
 	 **/
+	@ApiOperation(value = "保存用户信息",response = Result.class )
 	@PostMapping("save")
 	public Result save(@RequestBody @Valid DemoSaveFormDTO formDTO) {
 		return demoService.save(formDTO);
@@ -42,8 +46,9 @@ public class DemoController {
 	 * @Description 根据主键删除记录
 	 * @Date 2020/1/13 14:34
 	 **/
-	@PostMapping("delete/{id}")
-	public Result delete(@PathVariable("id") int id) {
+	@PostMapping("delete")
+	@ApiOperation(value = "根据主键删除记录", notes = "",response = Result.class )
+	public Result delete(@RequestParam(required = true) @ApiParam(value = "主键", required = true) @PathParam("id")int id) {
 		return demoService.delete(id);
 	}
 
@@ -54,6 +59,7 @@ public class DemoController {
 	 * @Description 修改
 	 * @Date 2020/1/13 14:33
 	 **/
+	@ApiOperation(value = "修改", notes = "",response = Result.class )
 	@PostMapping("update")
 	public Result update(@RequestBody @Valid DemoUpdateFormDTO formDTO) {
 		return demoService.update(formDTO);
@@ -67,7 +73,8 @@ public class DemoController {
 	 * @Date 2020/1/13 14:33
 	 **/
 	@GetMapping("query")
-	public Result<List<DemoEntity>> query(@RequestParam("name") String name) {
+	@ApiOperation(value = "根据姓名模糊查询", notes = "name可传空",response = Result.class)
+	public Result<List<DemoEntity>> query(@RequestParam(required = true) @ApiParam(name="name",value="用户姓名",required=true) String name) {
 		return demoService.query(name);
 	}
 
@@ -79,6 +86,7 @@ public class DemoController {
 	 * @Date 2020/1/13 21:25
 	 **/
 	@GetMapping("/downloadExcel")
+	@ApiOperation(value = "导出未删除用户列表", notes = "",response = Result.class )
 	public void export(HttpServletResponse response) {
 		List<DemoExportExcel> list = demoService.queryAll();
 		//导出到Excel
@@ -93,7 +101,8 @@ public class DemoController {
 	 * @Date 2020/1/13 21:25
 	 **/
 	@PostMapping("importExcel")
-	public Result<List<DemoImportEntity>> importExcel(@RequestParam("file") MultipartFile file) {
+	@ApiOperation(value = "批量导入用户信息", notes = "",response = Result.class )
+	public Result<List<DemoImportEntity>> importExcel(@RequestParam("file")@ApiParam(name="file",value="文件",required=true) MultipartFile file) {
 		return demoService.importExcel(file);
 	}
 }
