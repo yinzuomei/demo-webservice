@@ -13,7 +13,12 @@
     </resultMap>
 
     <select id="query" resultMap="demoMap" parameterType="java.lang.String">
-        select * from demo where del_flag='0' and name like concat('%', #{name}, '%') order by id asc
+        select * from demo
+        where del_flag='0'
+        <if test="name!=null and name!=''">
+            and name like concat('%', #{name}, '%')
+        </if>
+        order by id asc
     </select>
 
     <delete id="delete">
