@@ -16,8 +16,13 @@ import java.util.List;
  */
 public class Test {
 
+	private static SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+
 	public static void main(String[] args) {
-		testDate();
+		Date firstDate=getFirstDayDateOfMonth(new Date());
+		System.out.println(dateFormat.format(firstDate));
+		Date lastDate=getLastDayOfMonth(new Date());
+		System.out.println(dateFormat.format(lastDate));
 	}
 
 	public static void testDate() {
@@ -230,5 +235,46 @@ public class Test {
 		}
 	}
 
+	/**
+	 * @return java.util.Date
+	 * @param date
+	 * @Author yinzuomei
+	 * @Description 获取传入日期所在月的第一天
+	 * @Date 2020/1/15 14:21
+	 **/
+	public static Date  getFirstDayDateOfMonth(final Date date) {
+
+		final Calendar cal = Calendar.getInstance();
+
+		cal.setTime(date);
+
+		final int last = cal.getActualMinimum(Calendar.DAY_OF_MONTH);
+
+		cal.set(Calendar.DAY_OF_MONTH, last);
+
+		return cal.getTime();
+
+	}
+
+	/**
+	 * @return java.util.Date
+	 * @param date
+	 * @Author yinzuomei
+	 * @Description 获取传入日期所在月的最后一天
+	 * @Date 2020/1/15 14:22
+	 **/
+	public static Date getLastDayOfMonth(final Date date) {
+
+		final Calendar cal = Calendar.getInstance();
+
+		cal.setTime(date);
+
+		final int last = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+		cal.set(Calendar.DAY_OF_MONTH, last);
+
+		return cal.getTime();
+
+	}
 
 }
