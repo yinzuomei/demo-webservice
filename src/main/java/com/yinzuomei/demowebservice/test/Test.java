@@ -16,12 +16,12 @@ import java.util.List;
  */
 public class Test {
 
-	private static SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	public static void main(String[] args) {
-		Date firstDate=getFirstDayDateOfMonth(new Date());
+		Date firstDate = getFirstDayDateOfMonth(new Date());
 		System.out.println(dateFormat.format(firstDate));
-		Date lastDate=getLastDayOfMonth(new Date());
+		Date lastDate = getLastDayOfMonth(new Date());
 		System.out.println(dateFormat.format(lastDate));
 	}
 
@@ -232,17 +232,21 @@ public class Test {
 				break;
 			case "5":
 				System.out.println("str=5");
+				break;
+			default:
+				System.out.println("default,str=" + str);
+				break;
 		}
 	}
 
 	/**
-	 * @return java.util.Date
 	 * @param date
+	 * @return java.util.Date
 	 * @Author yinzuomei
 	 * @Description 获取传入日期所在月的第一天
 	 * @Date 2020/1/15 14:21
 	 **/
-	public static Date  getFirstDayDateOfMonth(final Date date) {
+	public static Date getFirstDayDateOfMonth(final Date date) {
 
 		final Calendar cal = Calendar.getInstance();
 
@@ -257,8 +261,8 @@ public class Test {
 	}
 
 	/**
-	 * @return java.util.Date
 	 * @param date
+	 * @return java.util.Date
 	 * @Author yinzuomei
 	 * @Description 获取传入日期所在月的最后一天
 	 * @Date 2020/1/15 14:22
